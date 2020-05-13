@@ -50,7 +50,7 @@ require_once 'google/vendor/googlesheetdata.php'; //gsheetid
 
     gtag('config', 'UA-165906647-1');
     </script>
-
+    <script src="https://www.google.com/recaptcha/api.js?render=6Lc7NPQUAAAAAKfUEB6bHdSgGML8cCzJL_FuaY5W"></script>
 </head>
 
 <body>
@@ -180,7 +180,8 @@ require_once 'google/vendor/googlesheetdata.php'; //gsheetid
                         <label id="userEmail-error" class="error" for="userEmail"></label>
                     </div>
                     <div class="form-group">
-                        <input type="phone" class="form-control" placeholder="Phone Number" name="phoneNumber" id="phoneNumber" value="">
+                        <input type="phone" class="form-control" placeholder="Phone Number" name="phoneNumber"
+                            id="phoneNumber" value="">
                         <label id="phoneNumber-error" class="error" for="phoneNumber"></label>
                     </div>
                     <div class="form-group">
@@ -190,6 +191,7 @@ require_once 'google/vendor/googlesheetdata.php'; //gsheetid
                     </div>
                     <small id="emailHelp" class="form-text text-muted">We'll never share your email/ number with anyone
                         else.</small>
+                    <input type="hidden" id="token" name="token" />
                     <input type="submit" class="btn btn-block" value="submit" />
                 </form>
             </div>
@@ -676,14 +678,14 @@ if (empty($values)) {
             // Prevent default posting of form - put here to work in case of errors
             event.preventDefault();
 
-            console.log("clicked1");
+            //console.log("clicked1");
 
             // Get user input values
             var userName = $('#userName').val();
             var userEmail = $('#userEmail').val();
             var phoneNumber = $('#phoneNumber').val();
             var msg = $('#msg').val();
-            
+
             if (userName != '' && userEmail != '' && msg != '') {
                 $('#ajaxResponse').html('<p>We are processing</p>');
 
@@ -741,7 +743,7 @@ if (empty($values)) {
                     $inputs.prop("disabled", false);
                 });
 
-            }else{
+            } else {
                 console.log("Form not evaluated");
             }
         });
@@ -762,13 +764,16 @@ if (empty($values)) {
         });
     }
     </script>
-    <!-- <script>
-  grecaptcha.ready(function() {
-      grecaptcha.execute('6Lc7NPQUAAAAAKfUEB6bHdSgGML8cCzJL_FuaY5W', {action: 'homepage'}).then(function(token) {
-        console.log(token);
-        document.getElementById("token").value = token;
-      });
-  });
-  </script> -->
+    <script>
+    grecaptcha.ready(function() {
+        grecaptcha.execute('6Lc7NPQUAAAAAKfUEB6bHdSgGML8cCzJL_FuaY5W', {
+            action: 'homepage'
+        }).then(function(token) {
+            // console.log(token);
+            document.getElementById("token").value = token;
+        });
+    });
+    </script>
 </body>
+
 </html>
